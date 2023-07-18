@@ -1,0 +1,454 @@
+:root {
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  body { background: #333; color: white; }
+  .form-popup { background: #333; color: white; }
+}
+
+@media (prefers-color-scheme: light) {
+  body { background: #ddd; color: black; }
+  .form-popup { background: #ddd; color: black; }
+}
+
+body {
+  overflow-x: hidden;
+  margin: 0;
+  padding: 10px;
+  font-family: Tahoma, Verdana, Segoe, sans-serif;
+  overflow-y: hidden;
+}
+
+.toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px;
+  z-index: 1;
+}
+
+.toolbar-content {
+  display: flex;
+  align-items: center;
+}
+
+#help-button {
+  position: fixed;
+  left: 10px;
+}
+
+#toggle-dark-mode {
+  position: fixed;
+  right: 10px;
+}
+
+/* Help Window Formatting */
+#help-text-field {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 35%;
+  height: 100%;
+  background-color: rgba(51, 51, 51, 1);
+  color: #fff;
+  z-index: 9999;
+  /* Ensure the help text field is on top of other elements */
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+#collapse-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 10px;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+.form-popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9;
+  cursor: move;
+}
+
+#dropdownContainer {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: inherit;
+  border: 1px solid #33333300;
+  border-top: none;
+  z-index: 999;
+}
+
+.autocomplete-container {
+  position: absolute;
+  z-index: 9999;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 300px; /* Set the width to match the input field */
+  margin-top: 25px; /* Adjust the margin to position it below the input field */
+}
+
+.autocomplete-container .suggestion-item {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.autocomplete-container .suggestion-item:hover {
+  background-color: #f5f5f581;
+}
+
+.drag-handle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 20px;
+  cursor: move;
+}
+
+.form-container {
+  max-width:400px;
+  padding: 10px;
+  background-color: inherit;
+}
+
+.form-container label {
+  align-content: center;
+}
+
+.input-row
+{
+  background-color: inherit;
+}
+
+#workOrderInput[type=text],
+#partNumberInput {
+  width: 100%;
+  margin: 5px 0;
+  border: none;
+  background-color: inherit;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: inherit;
+  gap: 10px;
+}
+
+.process-item {
+  display: flex;
+  align-items: center;
+}
+
+.process-fields {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.process-item > input {
+  width: 200px;
+}
+
+.process-name-input[type=text],
+.process-time-input[type=number] {
+  border: none;
+  color: #ffffff;
+  background-color: inherit;
+}
+
+.process-delete-button {
+  background: none;
+  border: none;
+  color: red;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 10px; /* Push the delete button to the right */
+  align-self: flex-start; /* Add this line to align the delete button to the left */
+}
+
+.btn-container {
+  margin-top: 20px;
+  display: flex; /* Change the display to flex */
+  justify-content: space-between; /* Add space between the buttons */
+}
+
+.btn-container .btn {
+  flex: 1; /* Make the buttons occupy equal space */
+}
+
+/* Adjust the styling of the delete button */
+.delete-button {
+  font-size: x-small;
+  color: rgba(0, 0, 0, 0.24);
+}
+
+#calendar-container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  white-space: nowrap;
+  height: calc(100vh - 60px); /* Adjust the height to fill the remaining viewport height */
+  margin-top: 60px; /* Add a top margin to create space for the toolbar */
+}
+
+.weeks-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.previous-week-button,
+.next-week-button {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.previous-week-button {
+  left: 10px;
+}
+
+.next-week-button {
+  right: 10px;
+}
+
+.week-container {
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  overflow-y: hidden;
+}
+
+.startDate-container {
+  padding-left: 30px; /* Adjust the value to set the desired space */
+}
+
+.days-container {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  flex-wrap: nowrap;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.day-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;
+  padding: 10px;
+  background-color: #fefefe34;
+  overflow: hidden;
+}
+
+.week-container:nth-child(even) .day-container:nth-child(odd) {
+  background-color: #fefefe05; /* Color for odd days in even weeks */
+}
+
+.week-container:nth-child(odd) .day-container:nth-child(even) {
+  background-color: #fefefe05; /* Color for even days in odd weeks */
+}
+
+.day-label {
+  font-weight: bold;
+  padding-bottom: 5px;
+}
+
+.part-container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  flex-grow: 1;
+  align-items: center;
+  padding-bottom: 10px;
+  overflow-y: auto;
+  position: relative;
+}
+
+.part-container.drag-over {
+  border: 2px dashed #666;
+}
+
+.part-container.highlight {
+  border: 10px dashed rgb(141, 52, 52);
+}
+
+.addPart-container {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 1; /* Set initial opacity to 1 */
+  transition: opacity 0.3s ease; /* Add transition for smooth visibility */
+}
+
+.addPart-container .button {
+  display: none;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.day-container:hover .addPart-container .button {
+  display: block;
+}
+
+.mini-listing.button,
+.mini-listing.button100 {
+  font-size: 10px;
+  margin-top: -5px;
+  padding: 5px 7px;
+}
+
+a.button {
+  border-radius: 3px 3px 3px 3px;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "proxima-nova-1", "proxima-nova-2", Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  line-height: 1;
+  padding: 9px 34px;
+  position: absolute;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.gray {
+  background: none repeat scroll 0 0 #aaaaaa;
+}
+
+.capacity-container {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+}
+
+#capacityInput[type=number]{
+  background-color: inherit;
+  color: inherit;
+  border: none;
+  margin-left: 10px;
+  font-family: inherit;
+  font-size: inherit;
+  width: 30px;
+}
+
+.total-hours {
+  margin-left: 10px;
+}
+
+.report-span {
+  font-size: xx-large;
+}
+
+.button {
+  border: none;
+  text-align: center;
+  display: block;
+  border-radius: 8px;
+}
+
+.dynamic-button {
+  width: 100%;
+  margin-bottom: 5px;
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: move;
+  position: relative;
+}
+
+.delete-button {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.24);
+  cursor: pointer;
+  pointer-events: none;
+}
+
+.process-content {
+  flex: 1;
+  display: none;
+}
+
+.dynamic-button.expanded .process-content{
+  display: block;
+}
+
+.dynamic-button.expanded .delete-button{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.scroll-button {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 24px;
+  background-color: #f2f2f2;
+  padding: 10px;
+  border: 1px solid #f2f2f2;
+  cursor: pointer;
+}
+
+.previous-button {
+  left: 0;
+}
+
+.next-button {
+  right: 0;
+}
+
+.hidden {
+  display: none;
+}

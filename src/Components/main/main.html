@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" type="text/css" href="index.css">
+  <title>Cell Planner</title>
+</head>
+
+<body>
+  <div class="toolbar">
+    <div class="toolbar-content">
+    </div>
+    <button id="help-button">Help</button>
+    <button id="toggle-dark-mode">Toggle Dark Mode</button>
+  </div>
+
+  <div id="help-text-field" class="hidden">
+    <button id="collapse-button" onclick=>Collapse</button>
+    <h3>Welcome to Cell Planner!</h3>
+    <h5>Purpose</h5>
+    <small>Cell Planner exists to help you plan ahead and see days where you are over capacity.</small>
+    <h5>Adding a Part to Your Calendar</h5>
+    <small>To use Cell Planner, simply start by hovering over a day and clicking on the "+" at the bottom. This will
+      open
+      the "Add Part Form." Fill this out with the Work Order number and Part number, and then with any processes you
+      might
+      need to perform! For example, if you need to paint a sign and it will take 20 minutes, type "Paint" and then "20."
+      Hit enter while your cursor is in either of the Process boxes to add another process field! Once you're done, hit
+      "Submit"
+      and your part will appear on its day. If you added it to the wrong day, no worries! Simply click and drag the part
+      to the right day.</small>
+    <h5>Managing Your Calendar</h5>
+    <small>Once you've added a few parts, you can begin to use the calendar's features. There are three numbers at the
+      bottom of the calendar:
+      Capacity, Hours, and a big number that says "8 hrs." at first. Capacity is your cell's capacity for that day,
+      whether that be determined by
+      employee hours, equipment availability, or something else. Hours is the sum of all of the work in that day. And
+      the big green number? That
+      shows the difference between capacity and hours. If that is red, you have more work for that day than you have
+      time to complete it.
+    </small>
+    <h5>Managing Your Capacity</h5>
+    <small>Now comes the key component: using the drag & drop functionality to manage your capacity. If you have a day
+      that's in the red: that is,
+      you have more work than you are able to complete, you can begin to try and drag that work into earlier days to
+      "load-level" your work that day.
+    </small>
+  </div>
+
+  <div id="calendar-container">
+    <div id="weeks-container" class="weeks-container"></div>
+    <button class="previous-week-button">&lt;</button>
+    <button class="next-week-button">&gt;</button>
+  </div>
+
+  <div class="form-popup" id="add-part-form">
+    <div class="drag-handle"></div>
+    <form class="form-container" onsubmit="submitForm(event)">
+      <label for="form-container">
+        <h4>Add Part</h4>
+      </label>
+      <div class="input-row" id="partInputContainer">
+        <label for="workOrderInput">Work Order</label>
+        <input type="text" id="workOrderInput" placeholder="Enter Work Order" name="workOrderInput" required>
+      </div>
+      <div class="input-row">
+        <label for="partNumberInput">Part Number</label>
+        <input type="text" id="partNumberInput" placeholder="Enter Part Number" name="partNumberInput" required>
+      </div>
+
+      <div id="process-container">
+        <label for="processNameInput">Processes</label>
+        <div id="processInputContainer" class="input-container">
+          <div class="process-item">
+            <div class="process-fields">
+              <input type="text" placeholder="Process Name" id="processNameInput" class="process-name-input" required>
+              <input type="number" placeholder="Time (in minutes)" id="processTimeInput" class="process-time-input"
+                required>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="btn-container">
+        <button type="submit" class="button" id="addPartSubmitButton">Submit</button>
+        <button type="button" class="button" id="addPartCloseButton">Cancel</button>
+      </div>
+    </form>
+  </div>
+  <script src="./addButton/addButton.js" type="module"></script>
+
+</html>
+<script src="index.js" type="module"></script>
+</body>
+
+</html>
